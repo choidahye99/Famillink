@@ -78,9 +78,10 @@ public class AccountController {
             responseResult.put("uid", token.get("uid"));
             responseResult.put("nickname", token.get("nickname"));
             responseResult.put("modelPath", path.get("model-path"));
+            responseResult.put("metaPath", path.get("meta-path"));
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(responseResult);
+        return ResponseEntity.status(sts).body(responseResult);
     }
 
     @ApiOperation(value = "Access Token 재발급", notes = "만료된 access token을 재발급받는다.")
