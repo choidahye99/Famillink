@@ -10,10 +10,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
+
+import java.io.File;
+import java.nio.file.Files;
 
 
 @Service
@@ -31,7 +38,6 @@ public class MovieServiceImpl implements MovieService {
     @Transactional
     public void sender(MovieSenderDTO sender, MultipartFile file) throws Exception {
 
-        // TODO: CJW, sender의 uid들이 같은 가족인지 valid 필요
 
         //현재는 sender에 있는 보내고자 하는 얘들이 같은
         Member m;
@@ -53,7 +59,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public InputStreamResource download(Long movie_uid) throws Exception {
+    public StreamingResponseBody download(Long movie_uid, HttpHeaders httpHeaders) throws Exception {
 
         try {
             //Movie table에서 보낸자와 받은 자가 같은 가족인지 판단을 해서 처리를 함
@@ -68,24 +74,27 @@ public class MovieServiceImpl implements MovieService {
         }
         String filename = movieMapper.getMoviePath(movie_uid);
         filename = "./" + filename;
+        File file = new File(filename);
+        if (!file.isFile()) {
+            throw new BaseException(ErrorMessage.NOT_READ_FILE);
+        }
+        httpHeaders.add("Content-Length", Long.toString(file.length()));
+
         // 파일 리소스 리턴
-        return fileService.loadAsResource(filename);
+        return outputStream -> {
+            FileCopyUtils.copy(Files.newInputStream(file.toPath()), outputStream);
+        };
     }
 
 
     @Override
     public void setRead(Long movie_uid) throws Exception {
 
-        try{
+        try {
             movieMapper.setMovie(movie_uid);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throw new BaseException(ErrorMessage.NOT_READ_FILE);
         }
-
-
-
     }
 
 
