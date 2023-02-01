@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { ReactMediaRecorder } from "react-media-recorder";
 import secrets from "../secrets.json"
 
 import useSpeechToText from "react-hook-speech-to-text"
@@ -25,6 +24,7 @@ const STT = () => {
     
     useEffect(() => {
         console.log(results)
+        console.log(results[-1])
     },[results])
 
       if (error) return <p>Web Speech API is not available in this browser 🤷‍</p>;
