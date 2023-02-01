@@ -13,10 +13,13 @@ import FaceValid from './pages/FaceValid';
 import PlayVideo from './pages/PlayVideo';
 import Record from './pages/Record';
 
+import STT from './components/STT';
+
 
 import { Box } from '@mui/system';
 import { Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
+
 
 function App() {
   
@@ -32,7 +35,7 @@ function App() {
   }
   return (
     <div className="App">
-      <MQTT/>
+      {/* <MQTT/> */}
       <Box sx={{
         display: "flex",
         justifyContent:"space-between",
@@ -47,6 +50,7 @@ function App() {
         <Route path="/facevalid" element={ <FaceValid /> } />
         <Route path="/playvideo" element={ <PlayVideo /> } />
         <Route path="/record" element={<Record/>} />
+        <Route path="/STT" element={<STT/>} />
       </Routes>
       </section>
       <footer> <Caption></Caption> </footer>

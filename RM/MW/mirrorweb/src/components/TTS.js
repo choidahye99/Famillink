@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useRef, useState } from "react"
-import secrets from "./secrets.json"
+import secrets from "../secrets.json"
 
 const TextToSpeech = () => {
     // API_KEY는 JSON 파일에
@@ -58,7 +58,7 @@ const TextToSpeech = () => {
             <button
             onClick={setTextAndRead}
             >
-               안녕하세요
+              사랑합니다.
             </button>
         </div>
      );
