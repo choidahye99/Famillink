@@ -15,6 +15,8 @@ public interface MovieService {
     void setRead(Long movie_uid)throws Exception;
 
 
+    //
+
 
 
 }
