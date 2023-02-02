@@ -25,19 +25,20 @@ const STT = () => {
           }
       });
 
-    const Navigate = useNavigate();
+    /* const Navigate = useNavigate(); */
     
     useEffect(() => {
         startSpeechToText()
 
         if (!mounted.current) {
           mounted.current = true;
-        } else {
+        } else if (results.length>0) { 
+          console.log(results)
           let text = JSON.stringify(results[results.length-1]["transcript"])
           console.log(text)
              if (text.includes("녹화") || text.includes("노콰")) {
               console.log("디스패치 할 거야")
-              Navigate("/record")
+              /* Navigate("/record") */
             }
         }
       },[results])
