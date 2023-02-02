@@ -2,12 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import secrets from "../secrets.json"
 
 import useSpeechToText from "react-hook-speech-to-text"
+import { useNavigate } from "react-router-dom";
 
 const STT = () => {
     const API_KEY = secrets.google_speech_api_key
+    const mounted = useRef(false);
+
     const {
         error,
-        interimResult,
         isRecording,
         results,
         startSpeechToText,
@@ -15,31 +17,44 @@ const STT = () => {
       } = useSpeechToText({
         continuous: true,
         useLegacyResults: false,
+        crossBrowser: true,
         useOnlyGoogleCloud: true,
         googleApiKey: API_KEY,
         googleCloudRecognitionConfig: {
             languageCode: 'ko-KR'
           }
       });
+
+    const Navigate = useNavigate();
     
     useEffect(() => {
-        console.log(results)
-        console.log(results[-1])
-    },[results])
+        startSpeechToText()
+
+        if (!mounted.current) {
+          mounted.current = true;
+        } else {
+          let text = JSON.stringify(results[results.length-1]["transcript"])
+          console.log(text)
+             if (text.includes("녹화") || text.includes("노콰")) {
+              console.log("디스패치 할 거야")
+              Navigate("/record")
+            }
+        }
+      },[results])
 
       if (error) return <p>Web Speech API is not available in this browser 🤷‍</p>;
 
       return (
         <div>
           <h1>Recording: {isRecording.toString()}</h1>
-          <button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
-            {isRecording ? 'Stop Recording' : 'Start Recording'}
-          </button>
+          
+          <button onClick={startSpeechToText}>start</button>
+          <button onClick={stopSpeechToText}>stop</button>
+          
           <ul>
             {results.map((result) => (
               <li key={result.timestamp}>{result.transcript}</li>
             ))}
-            {interimResult && <li>{interimResult}</li>}
           </ul>
         </div>
       );

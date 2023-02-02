@@ -1,6 +1,6 @@
 import './App.css';
 
-import MQTT from './modules/MQTT';
+import MQTT from './components/MQTT';
 
 import Clock from './components/Clock';
 import Weather from './components/Weather';
@@ -35,7 +35,8 @@ function App() {
   }
   return (
     <div className="App">
-      {/* <MQTT/> */}
+      <MQTT/>
+      {/* <STT /> */}
       <Box sx={{
         display: "flex",
         justifyContent:"space-between",

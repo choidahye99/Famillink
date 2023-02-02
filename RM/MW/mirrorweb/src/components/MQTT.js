@@ -1,12 +1,21 @@
 import React, {useEffect, useRef, useState} from 'react';
+
+
 import mqtt from "precompiled-mqtt";
 import axios from "axios"
 
 function MQTT() {
   const URL = "ws://localhost:9001";
   const client = mqtt.connect(URL);
+
+  
+
   const [userList, setList] = useState([]);
-  const [isValid,setValid] = useState(false)
+  const [validData,setValid] = useState({
+    "image": ""
+  })
+  const [isValid, setOkay] = useState(false)
+
   const mounted = useRef(false);
 
 
@@ -30,26 +39,37 @@ function MQTT() {
       })   
     }
     if ((userList.filter(user => user !== userList[0])).length ===0) {
-      setValid(() => {
-        return true
-      })
+      let image = JSON.parse(message).image
+      if (image) {
+        setValid((validData) => {
+          return {
+            ...validData,
+            ["image"]: image,
+          }
+        })
+      }
+      setOkay(true);
     }
   })
+
+  useEffect(() => {
+
+  },[])
 
   useEffect(() =>{
     // 마운트 됐을 때는 실행 안 함
     if (!mounted.current) {
       mounted.current = true;
-      console.log("마운트 됐구나")
     } else {
-      console.log("인식됐구나")
-      const name = userList[0]
-      console.log("axios 보낸다.")
+      const sendData = JSON.stringify(validData)
+      console.log(sendData)
       axios({
         method: "get",
         url: "이름을 포함한 url",
         header: "",
-      })
+        data: sendData
+        }
+      )
       .then((res) => {
         console.log(res)
         // 정보 저장
