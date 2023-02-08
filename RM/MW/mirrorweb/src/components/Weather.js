@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import './Weather.css'
 import React from 'react';
 import { WiDaySunny, WiSnowflakeCold, WiThunderstorm, WiDayRain, WiNightAltRain, WiNightClear, WiRain, WiNightAltCloudy, WiDayCloudy, WiCloud, WiCloudy, WiFog } from "weather-icons-react"
@@ -6,6 +7,19 @@ import secrets from "./secrets.json"
 
 function Weather() {
     const API_KEY = secrets.weather_api_key;
+=======
+<<<<<<< HEAD
+import './Weather.css'
+import { WiDaySunny, WiSnowflakeCold, WiThunderstorm, WiDayRain, WiNightAltRain, WiNightClear, WiRain, WiNightAltCloudy, WiDayCloudy, WiCloud, WiCloudy, WiFog } from "weather-icons-react"
+import { useState } from 'react';
+=======
+import React from 'react';
+>>>>>>> origin/develop
+
+
+function Weather() {
+    const API_KEY = "da4992756d3a31cd9b0ded28d6534403";
+>>>>>>> origin/develop
     const [city, setCity] = useState('Seoul');
     const [temp, setTemp] = useState('5');
     // 날씨별로 react-icons 지정
@@ -92,6 +106,10 @@ function Weather() {
     const lon = position.coords.longitude;
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=kr`;
     fetch(url)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/develop
     .then((response) => response.json())
     .then((data) => {
         // 온도는 반올림한다.
@@ -102,6 +120,19 @@ function Weather() {
         setWeatherStatus(data.weather[0].icon)
         const findIndexNum = weatherIcon.findIndex(element => element.icon === weatherStatus)
         setFindWeather(weatherIcon[findIndexNum].img)
+<<<<<<< HEAD
+=======
+=======
+        .then((response) => response.json())
+        .then((data) => {
+
+        const city = document.querySelector("#weather span:first-child");
+        const weather = document.querySelector("#weather span:last-child");
+        city.innerText = data.name;
+        weather.innerText = `${data.weather[0].description} / ${data.main.temp}ºC`;
+        })
+>>>>>>> origin/develop
+>>>>>>> origin/develop
     }
     )
 }
@@ -120,6 +151,11 @@ function Weather() {
             <div className='weatherimg'>{findWeather}</div>
             <div className='temp'>{temp}º C</div>
             </div>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/develop
         )
 }
         

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {useSelector,useDispatch} from "react-redux"
 import { startRecording, stopRecording } from "../modules/valid";
 
@@ -74,6 +75,18 @@ const Record = () => {
             <p>00:{timer < 10 ? `0${timer}` : 10<=timer<=30 ? `${timer}` : "30"}</p>
             <button onClick={startRecord}>임시 시작버튼</button>
             <button onClick={stopRecord}>임시 중단버튼</button>
+=======
+import Timer from "../components/Timer";
+
+const Record = () => {
+    // 영상 녹화 중엔 따로 표시해줄 화면은 없다.
+
+    return ( 
+        <div style ={{
+            paddingTop : '800px',
+        }}>
+            <Timer></Timer>
+>>>>>>> origin/develop
         </div>
      );
 }

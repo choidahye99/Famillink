@@ -8,8 +8,14 @@ const Main = () => {
     return ( 
         <div>
           <div className='calendardiv'>
+<<<<<<< HEAD
             <Calendar />  
           </div>
+=======
+            <Calendar />
+          </div>
+          <Caption></Caption>
+>>>>>>> origin/develop
           <div className='tododiv'>
             <Todo />
           </div>
