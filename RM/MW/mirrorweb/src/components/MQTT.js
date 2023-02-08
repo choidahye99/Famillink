@@ -1,21 +1,22 @@
 import React, {useEffect, useRef, useState} from 'react';
 import mqtt from "precompiled-mqtt";
 import axios from "axios"
-import { setInfo, setMe, setMemberAccessToken, setMemberRefreshToken, setToMember, setValid, setVideos, startRecording, stopRecording } from '../modules/valid';
+import { setInfo, setMe, setMemberAccessToken, setMemberRefreshToken, setToMember, setValid, setVideos, startRecording, stopRecording, } from '../modules/valid';
 import {useSelector, useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 
 
 function MQTT() {
   // redux에서 state 불러오기
-  const { familyAccessToken, memberAccessToken, me, validation, toMember , recording, storedVideos } = useSelector(state => ({
+  const { familyAccessToken, memberAccessToken, me, validation, toMember , recording, storedVideos, } = useSelector(state => ({
     familyAccessToken: state.valid.familyAccessToken,
     memberAccessToken: state.valid.memberAccessToken,
     me : state.valid.me,
     validation : state.valid.validation,
     toMember : state.valid.toMember,
     recording : state.valid.isRecording,
-    storedVideos : state.valid.videos
+    storedVideos : state.valid.videos,
+
   }))
   // redux에서 action 가져오기
   const dispatch = useDispatch();
@@ -44,7 +45,6 @@ function MQTT() {
   const testMounted = useRef(false);
   const memberMounted = useRef(false);
   const testNumber = useRef(0);
-
 
   // 브로커에 연결되면
   client.on('connect', () => {
