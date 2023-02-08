@@ -4,11 +4,7 @@ import MQTT from './components/MQTT';
 
 import Clock from './components/Clock';
 import Weather from './components/Weather';
-<<<<<<< HEAD
 import STT from './components/STT';
-=======
-import Caption from './components/Caption';
->>>>>>> origin/develop
 
 import Main from './pages/Main';
 import LoginMirror from './pages/loginMirror';
