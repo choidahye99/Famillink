@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/develop
 import './Weather.css'
 import React from 'react';
 import { WiDaySunny, WiSnowflakeCold, WiThunderstorm, WiDayRain, WiNightAltRain, WiNightClear, WiRain, WiNightAltCloudy, WiDayCloudy, WiCloud, WiCloudy, WiFog } from "weather-icons-react"
@@ -7,6 +10,7 @@ import secrets from "./secrets.json"
 
 function Weather() {
     const API_KEY = secrets.weather_api_key;
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 import './Weather.css'
@@ -19,6 +23,8 @@ import React from 'react';
 
 function Weather() {
     const API_KEY = "da4992756d3a31cd9b0ded28d6534403";
+>>>>>>> origin/develop
+=======
 >>>>>>> origin/develop
     const [city, setCity] = useState('Seoul');
     const [temp, setTemp] = useState('5');
@@ -107,8 +113,11 @@ function Weather() {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=kr`;
     fetch(url)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+>>>>>>> origin/develop
+=======
 >>>>>>> origin/develop
     .then((response) => response.json())
     .then((data) => {
@@ -121,6 +130,7 @@ function Weather() {
         const findIndexNum = weatherIcon.findIndex(element => element.icon === weatherStatus)
         setFindWeather(weatherIcon[findIndexNum].img)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
         .then((response) => response.json())
@@ -132,6 +142,8 @@ function Weather() {
         weather.innerText = `${data.weather[0].description} / ${data.main.temp}ºC`;
         })
 >>>>>>> origin/develop
+>>>>>>> origin/develop
+=======
 >>>>>>> origin/develop
     }
     )
@@ -152,9 +164,12 @@ function Weather() {
             <div className='temp'>{temp}º C</div>
             </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
+>>>>>>> origin/develop
+=======
 >>>>>>> origin/develop
         )
 }

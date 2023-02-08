@@ -10,19 +10,10 @@ const SET_INFO = "valid/SET_INFO"
 const START_RECORDING = "valid/START_RECORDING"
 const STOP_RECORDING = "valid/STOP_RECORDING"
 const SET_TOMEMBER = "valid/SET_TOMEMBER"
-<<<<<<< HEAD
 const SET_VIDEOS = "valid/SET_VIDEOS"
 const SET_TODOS = "valid/SET_TODOS"
 
 
-=======
-const SET_VIDEOS = "valid/git staSET_VIDEOS"
-
-
-
-//123
-
->>>>>>> origin/develop
 // 액션 생성 함수
 export const setFamilyAccessToken = (familytoken) => ({type:SET_FAMILYACCESSTOKEN, familytoken})
 export const setFamilyRefreshToken = (familyrefreshtoken) => ({type:SET_FAMILYREFRSCHTOKEN, familyrefreshtoken})
@@ -52,12 +43,8 @@ const initialState = {
         "최진우": 4
     },
     toMember: null,
-<<<<<<< HEAD
     videos: [],
     todos: [],
-=======
-    videos: []
->>>>>>> origin/develop
 }
 
 
@@ -120,14 +107,11 @@ export default function valid(state = initialState, action) {
                 ...state,
                 toMember: action.memberID
             }
-<<<<<<< HEAD
         case SET_TODOS:
             return {
                 ...state,
                 todos: action.todoList
             }
-=======
->>>>>>> origin/develop
         default :
           return state
     }

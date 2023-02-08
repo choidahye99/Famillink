@@ -8,7 +8,7 @@ const Main = () => {
     return ( 
         <div>
           <div className='calendardiv'>
-            <Calendar />
+            <Calendar />  
           </div>
           <Caption></Caption>
           <div className='tododiv'>
