@@ -6,9 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import rootReducer from './modules';
 
 // redux
-
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+
 
 // router
 import { BrowserRouter } from 'react-router-dom';
