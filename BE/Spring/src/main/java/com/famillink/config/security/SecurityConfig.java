@@ -55,10 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/account/mail",
                         "/account/check/**",
                         "/account/find/password",
-                        "/flask/label",
-                        "/flask/model",
-                        "/flask/learn_model",
-                        "/flask/learn_label",
+                        "/flask/**",
+                        "/movie/regist/*",
                         "/sse/**"
                 )
                 .permitAll()//모든 인증을 요구를 하지는 않지만
