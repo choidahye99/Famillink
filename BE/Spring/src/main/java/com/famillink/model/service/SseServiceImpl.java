@@ -44,7 +44,7 @@ public class SseServiceImpl implements SseService{
 
     @Override
     public void sendLostData(String lastEventId, Long member_to, String emitterId, SseEmitter emitter) {
-        Map<String, Object> eventCaches = emitterService.findAllEventCacheStartWithByMemberUid(String.valueOf(member_to));
+        Map<String, Object> eventCaches = emitterService.findAllEventCacheStartWithByMemberUid(member_to);
 
         eventCaches.entrySet().stream()
                 .filter(entry -> lastEventId.compareTo(entry.getKey()) < 0)
@@ -80,7 +80,7 @@ public class SseServiceImpl implements SseService{
         String receiverId = String.valueOf(member_to);
         String eventId = receiverId + "_" + System.currentTimeMillis();
 
-        Map<String, SseEmitter> emitters = emitterService.findAllEmitterStartWithByMemberUid(receiverId);
+        Map<String, SseEmitter> emitters = emitterService.findAllEmitterStartWithByMemberUid(member_to);
         emitters.forEach(
                 (key, emitter) -> {
                     emitterService.saveEventCache(key, response);

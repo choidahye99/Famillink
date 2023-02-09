@@ -19,19 +19,21 @@ public class EmitterServiceImpl implements EmitterService{
     @Override
     public SseEmitter save(String emitterId, SseEmitter sseEmitter) {
         emitters.put(emitterId, sseEmitter);
+        //System.out.println("emitters: "+emitters);
         return sseEmitter;
     }
 
     @Override
-    public void saveEventCache(String eventCacherId, Object event) {
-        eventCache.put(eventCacherId, event);
+    public void saveEventCache(String eventCacheId, Object event) {
+        eventCache.put(eventCacheId, event);
 
+        System.out.println("eventCacheId" + eventCacheId);
     }
 
     @Override
-    public Map<String, SseEmitter> findAllEmitterStartWithByMemberUid(String member_to) {
+    public Map<String, SseEmitter> findAllEmitterStartWithByMemberUid(Long member_to) {
         return emitters.entrySet().stream()
-                .filter(entry -> entry.getKey().startsWith(member_to))
+                .filter(entry -> entry.getKey().startsWith(String.valueOf(member_to)))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         //Collectors의 toMap() 메서드를 사용하여 Stream을 Map인스턴스로 수집
@@ -39,9 +41,9 @@ public class EmitterServiceImpl implements EmitterService{
     }
 
     @Override
-    public Map<String, Object> findAllEventCacheStartWithByMemberUid(String member_to) {
+    public Map<String, Object> findAllEventCacheStartWithByMemberUid(Long member_to) {
         return eventCache.entrySet().stream()
-                .filter(entry -> entry.getKey().startsWith(member_to))
+                .filter(entry -> entry.getKey().startsWith(String.valueOf(member_to)))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
@@ -51,21 +53,23 @@ public class EmitterServiceImpl implements EmitterService{
     }
 
     @Override
-    public void deleteAllEmitterStartWithMemberUid(String member_to) {
+    public void deleteAllEmitterStartWithMemberUid(Long member_to) {
         emitters.forEach(
                 (key, emitter) -> {
-                    if (key.startsWith(member_to)) {
+                    if (key.startsWith(String.valueOf(1))) {
                         emitters.remove(key);
                     }
                 }
         );
+
+        //System.out.println("delete : "+emitters);
     }
 
     @Override
-    public void deleteAllEventCacheStartWithId(String member_to) {
+    public void deleteAllEventCacheStartWithId(Long member_to) {
         eventCache.forEach(
                 (key, emitters) -> {
-                    if (key.startsWith(member_to)) {
+                    if (key.startsWith(String.valueOf(member_to))) {
                         eventCache.remove(key);
                     }
                 }

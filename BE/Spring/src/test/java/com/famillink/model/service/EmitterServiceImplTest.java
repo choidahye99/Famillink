@@ -57,7 +57,7 @@ public class EmitterServiceImplTest {
         emitterService.save(emitterId3, new SseEmitter(DEFAULT_TIMEOUT));
 
         //when
-        Map<String, SseEmitter> ActualResult = emitterService.findAllEmitterStartWithByMemberUid(String.valueOf(member_to));
+        Map<String, SseEmitter> ActualResult = emitterService.findAllEmitterStartWithByMemberUid(member_to);
 
         //then : 등록된 emitter를 다 찾는지 비교
         Assertions.assertEquals(3, ActualResult.size());
@@ -86,7 +86,7 @@ public class EmitterServiceImplTest {
         emitterService.saveEventCache(eventCacheId3, response);
 
         //when
-        Map<String, Object> ActualResult = emitterService.findAllEventCacheStartWithByMemberUid(String.valueOf(member_to));
+        Map<String, Object> ActualResult = emitterService.findAllEventCacheStartWithByMemberUid(member_to);
 
         //then
         Assertions.assertEquals(3, ActualResult.size());
@@ -105,7 +105,7 @@ public class EmitterServiceImplTest {
         emitterService.deleteById(emitterId);
 
         //then
-        Assertions.assertEquals(0, emitterService.findAllEmitterStartWithByMemberUid(emitterId).size());
+        Assertions.assertEquals(0, emitterService.findAllEmitterStartWithByMemberUid(member_to).size());
     }
 
     @Test
@@ -122,10 +122,10 @@ public class EmitterServiceImplTest {
 
 
         //when
-        emitterService.deleteAllEmitterStartWithMemberUid(String.valueOf(member_to));
+        emitterService.deleteAllEmitterStartWithMemberUid(member_to);
 
         //then
-        Assertions.assertEquals(0, emitterService.findAllEmitterStartWithByMemberUid(String.valueOf(member_to)).size());
+        Assertions.assertEquals(0, emitterService.findAllEmitterStartWithByMemberUid(member_to).size());
     }
 
     @Test
@@ -147,11 +147,11 @@ public class EmitterServiceImplTest {
 
 
         //when
-        emitterService.deleteAllEventCacheStartWithId(String.valueOf(member_to));
+        emitterService.deleteAllEventCacheStartWithId(member_to);
 
 
         //then
-        Assertions.assertEquals(0, emitterService.findAllEventCacheStartWithByMemberUid(String.valueOf(member_to)).size());
+        Assertions.assertEquals(0, emitterService.findAllEventCacheStartWithByMemberUid(member_to).size());
 
 
     }
