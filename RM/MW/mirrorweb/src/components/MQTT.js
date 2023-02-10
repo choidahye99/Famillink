@@ -3,7 +3,7 @@ import mqtt from "precompiled-mqtt";
 import axios from "axios"
 import { setInfo, setMe, setMemberAccessToken, setMemberRefreshToken, setToMember, setValid, setVideos, startRecording, stopRecording, setFamilyAccessToken, setTodos } from '../modules/valid';
 import {useSelector, useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 function MQTT() {
@@ -33,6 +33,7 @@ function MQTT() {
 
 
   const Navigate = useNavigate()
+  const location = useLocation();
 
   // mqtt 연결 준비
   const URL = "ws://localhost:9001";
@@ -41,7 +42,7 @@ function MQTT() {
   // 사용할 변수 정의
   const [userList, setList] = useState([])
   const [noneList, setNoneList] = useState([]) 
-  const [nameData, setName] = useState(null)
+  const [soundData, setSoundData] = useState("")
   const [imageData, setImage] = useState("")
 
   const nameValid = useRef(false);
@@ -59,7 +60,7 @@ function MQTT() {
   useEffect(() => {
     client.on('connect', () => {
       // 연결 되면 토픽을 구독
-      client.subscribe(["/local/face/result/", "/local/qrtoken/"], function (err) {
+      client.subscribe(["/local/face/result/", "/local/qrtoken/", "/local/sound/"], function (err) {
         console.log("구독")      
         if (err) {
           console.log(err)
@@ -105,11 +106,11 @@ function MQTT() {
           client.publish("/local/qr/","1")
         })
       } else if (topic === "/local/sound/") {
+        setSoundData(JSON.parse(message))
       }
     })
   },[me])
   
-  // 메세지가 오면
   useEffect(() => {
     if (!me) {
       if (userAxiosActivated.current===0){
@@ -258,8 +259,26 @@ function MQTT() {
     
   },[noneList])
 
+  useEffect(()=> {
+    if (soundData) {
+      if (me) {
+        if (location.pathname !== "/record") {
+          if (soundData.includes("녹화") || soundData.includes("노콰")) {
+            Navigate("/record")
+            setSoundData("")
+          }
+        } else if (location.pathname === "/record") {
+          if (toMember === null) {
+            if (Object.keys(memInfo).includes(soundData)) {
+              saveToMember(soundData)
+              setSoundData("")
+            }
+          }
+        }
+      } 
+    }
+  },[soundData])
 }
-
 
 
 

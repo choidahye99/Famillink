@@ -30,7 +30,7 @@ function App() {
   return (
     <div className="App">
       <MQTT/>
-      <STT />
+      
       <Box sx={{
         display: "flex",
         justifyContent:"space-between",

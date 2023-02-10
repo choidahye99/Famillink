@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+/* import React, { useEffect, useRef, useState } from "react";
 import secrets from "./secrets.json"
 
 import useSpeechToText from "react-hook-speech-to-text"
@@ -81,4 +81,4 @@ const STT = () => {
 
 
 
-export default React.memo(STT);
+export default React.memo(STT); */
