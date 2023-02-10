@@ -169,6 +169,7 @@ function MQTT() {
           }
         })
         .then ((res) => {
+          console.log(`로그인한 사람은 ${me}`)
           console.log(res)
           if (res.data["movie-list"]){
             const objectList = res.data["movie-list"]
@@ -270,7 +271,7 @@ function MQTT() {
         } else if (location.pathname === "/record") {
           if (toMember === null) {
             if (Object.keys(memInfo).includes(soundData)) {
-              saveToMember(soundData)
+              saveToMember(memInfo[soundData])
               setSoundData("")
             }
           }
