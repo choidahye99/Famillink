@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 const StyledButton = styled.button`
 padding: 0.75rem 2rem;
+margin: 0.75rem;
 line-height: 1;
 border-radius: 1.875rem;
 box-shadow: 0 0 1px rgb(0 0 0 / 0%);
@@ -15,12 +16,13 @@ display: inline-block;
 cursor: pointer;
 border: none;
 outline: none;
-background-color: var(--first-color);
+background-color: ${palette.orange[6]};
 font-weight: var(--font-bold);
 font-family: var(--body-font);
 font-size: var(--normal-font-size);
 &:hover {
   animation: button-push 0.3s linear 1;
+  background: ${palette.orange[4]};
 }
 @keyframes button-push {
   50% {

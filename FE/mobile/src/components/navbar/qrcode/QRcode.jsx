@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./blog.css";
+import "./qrcode.css";
 import axios from "axios";
 import Button from "../../common/Button";
 
@@ -13,12 +13,16 @@ const Blog = () => {
   };
 
   return (
+    <div className="height100">
     <div className="qrcode">
       {showQR ? (
-        <img src={qrCodeUrl} alt="QR code" />
+        <img src={qrCodeUrl} alt="QR code" className="qrimg"/>
       ) : (
-        <Button onClick={handleQRClick}>QR코드 생성</Button>
-      )}
+<div></div>
+        )}
+        <br />
+        <Button onClick={handleQRClick} className="qrbtn">QR코드 생성</Button>
+    </div>
     </div>
   );
 };
