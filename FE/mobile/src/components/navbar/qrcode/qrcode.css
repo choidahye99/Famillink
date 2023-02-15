@@ -1,0 +1,41 @@
+.height100 {
+  /* height: 100%; */
+  display: flex;
+  justify-content: center;
+}
+.qrcode {
+margin: 10vh;
+padding: 5vh;
+width: 60vh;
+background: #fff;
+
+justify-content: space-between;
+flex-direction: column;
+/* align-items: center; */
+text-align: center;
+border-radius: 15px;
+box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.defaultimg {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  max-width: 300px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.qrimg{
+  margin-top: 30px;
+  margin-bottom: 48px;
+}
+.qrimg:hover{
+  width: 200%;
+}
+
+.qrbtn {
+  text-align: center;
+  align-items: end;
+  justify-content: center;
+}

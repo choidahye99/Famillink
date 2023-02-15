@@ -17,8 +17,8 @@ const About = () => {
               expedita suscipit beatae voluptatibus distinctio vero tempora
               earum nisi soluta, nam, odit enim?
             </p>
-            <a href="" className="btn">
-              Download CV
+            <a href="/" className="btn">
+              Home
             </a>
           </div>
 

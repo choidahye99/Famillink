@@ -7,9 +7,14 @@ import Services from "./services/Services";
 import Resume from "./resume/Resume";
 import Portfolio from "./portfolio/Portfolio";
 import Testimonials from "./testmonials/Testimonials";
-import Blog from "./blog/Blog";
+import QRcode from "./qrcode/QRcode"
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  function handleQRClick() {
+    navigate('/qrcode')
+  }
   return (
     <>
       <Sidebar />
@@ -20,7 +25,9 @@ const Navbar = () => {
         <Resume />
         <Portfolio />
         <Testimonials />
-        <Blog />
+        <div onClick={handleQRClick}>
+        <QRcode />
+        </div>
       </main>
     </>
   );
