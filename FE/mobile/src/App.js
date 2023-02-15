@@ -10,21 +10,21 @@ import FamilyMemberRegister from "./pages/FamilyMemberRegister";
 import Record from "./pages/Record";
 import Calendars from "./pages/Calendars";
 import Todo from "./pages/Todo";
+import QRcode from "./components/navbar/qrcode/QRcode"
 
 
 function App() {
   const token = localStorage.getItem("faccesstoken");
-  console.log(token);
+
+  // const checkfamilymember = localStorage.getItem("")
   return (
     <div className="App">
+        {/* <AuthLayout component={<Navbar />} authenticated={token} /> */}
       <Routes>
-        {/* <Route
-          path="/"
-          element={<AuthLayout component={<Navbar />} authenticated={token} />}
-        /> */}
         <Route path="/" element={<Navbar />} />
         <Route path="/login" element={<Login />} />
         <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/findpassword" element={<SignUp />} />
         <Route path="/SignUpSuccess" element={<SignUpSuccess />} />
         <Route path="/FamilyMember" element={<FamilyMember />} />
         <Route path="/todo" element={<Todo />}/>
@@ -34,6 +34,7 @@ function App() {
         />
         <Route path="/Record" element={<Record />} />
         <Route path="/Calendars" element={<Calendars/>} />
+        <Route path="/qrcode" element={<QRcode />} />
       </Routes>
     </div>
   );

@@ -10,10 +10,11 @@ import { signup } from "../../modules/auth";
 const StyledAuthForm = styled.div`
   padding: 20px;
   align-items: center;
+  text-align: center;
   h3 {
     text-align: center;
     color: ${palette.gray[8]};
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
   }
 `;
 //에러 화면
@@ -28,28 +29,35 @@ const ErrorMessage = styled.div`
 // 스타일링 된 input
 
 const StyledInput = styled.input`
-  margin-bottom: 1rem;
-  font-size: 1rem;
+  margin-bottom: 1.125rem;
   border: none;
   border-bottom: 1px solid ${palette.gray[5]};
-  padding-bottom: 0.5rem;
   outline: none;
   width: 100%;
+  border-radius: 15px;
+  // color: ${palette.gray[3]}
+  // border: 1px solid #b7b7b7;
+  padding: 10px 10px 8px 13px;
+  font-size: 0.95rem;
+  transition: 0.2s;
+  caret-color:#ff922b;
+  
+  margin-bottom: 10px;
   &::placeholder {
     left: 5px;
-    color: #adadad;
-    // focus {
-    //   top: -20px;
-    //   font-size: 0.8rem;
-    // }
+    font-size:0.875rem;
+    color: #bebebe;
   }
   &:focus {
+    border-bottom: 1px solid ${palette.orange[5]};
+    outline: none;
+    // transition: 0.5s;
+    color: #ff922b;
+    background-color: ${palette.orange[3]}
     ::placeholder {
       color: ${palette.orange[5]};
       transition: 0.5s;
-    }
-    color: ${palette.orange[5]};
-    border-bottom: 2px solid ${palette.orange[5]};
+    },
   }
   & + & {
     margin-top: 1rem;
@@ -61,6 +69,7 @@ const StyledInput = styled.input`
 const Footer = styled.div`
   margin-top: 2rem;
   text-align: right;
+  font-size: 0.9rem;
   a {
     color: ${palette.gray[6]};
     text-decoration: underline;
@@ -70,7 +79,7 @@ const Footer = styled.div`
   }
 `;
 const ButtonWithMarginTop = styled(Button)`
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 `;
 
 const textMap = {
@@ -82,10 +91,16 @@ const welcomeText = {
   login: "안녕하세요 패밀링크입니다.",
   signup: "패밀링크 회원가입"
 }
+const hypenTel = (target) => {
+  target.value = target.value
+    .replace(/[^0-9]/g, '')
+    .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+ }
 
 const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
   const text = textMap[type];
   const wcText = welcomeText[type];
+  
   return (
     <StyledAuthForm>
       <h3>{wcText}</h3>
@@ -141,8 +156,10 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
             name="phone"
             placeholder="대표 전화번호"
             type="tel"
+            onInput={hypenTel}
             onChange={onChange}
             value={form.phone}
+            maxLength="13"
           />
         )}
         {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -152,6 +169,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
       </form>
       <Footer>
         {type === "login" ? (
+          <Link to="/findpassword">비밀번호 찾기</Link>,
           <Link to="/signup">회원가입</Link>
         ) : (
           <Link to="/login">로그인</Link>

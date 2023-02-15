@@ -7,45 +7,73 @@ import { useDispatch } from "react-redux";
 import { familyMemberProfile, familyMemberName } from "../modules/token";
 // import Me from "/images/댜운로드.jpg";
 
-const StyledImg = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 100%;
-  margin-bottom: 1.5rem;
-`;
 
-const StyledDiv = styled.div`
-height: 200px;
-width: 200px;
-padding: 15px;
-margin: auto;
-border-radius: 25px;
+
+const StyledFM = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:100%;
+  `
+  
+  const StyledForm = styled.form`
+  // height: 100%;
+margin: 7vh;
+padding: 5vh;
+width: 60vh;
+background: #fff;
 display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
-box-shadow: 10px 8px 15px 0px  #ffd8a8;
+text-align: center;
+border-radius: 15px;
+box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+
+  `
+
+  const StyledImg = styled.img`
+  width: 13vh;
+  height: 13vh;
+  border-radius: 100%;
+  margin: auto;
+  // margin-bottom: 1.5rem;
+`
+const StyledGrid = styled.div`
+// margin:8vh;
+padding: 8vh;
+display: grid;
+grid-template-rows: 1fr;
+grid-template-columns: 1fr 1fr;
+`
+
+const StyledDiv = styled.div`
+height: 20vh;
+width: 20vh;
+padding: 3px;
+margin: 10px;
+border-radius: 15px;
+display: flex;
+justify-content: center;
+flex-direction: column;
+align-items: center;
+text-align: center;
+box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 background: #fff;
 cursor: pointer;
-/* background-image: url('https://github.com/OlgaKoplik/CodePen/blob/master/leaf2.png?raw=true'), url('https://github.com/OlgaKoplik/CodePen/blob/master/leaf.png?raw=true'); */
-// background-repeat: no-repeat, no-repeat;
-// background-position: 120% -5%, 200% -40%;
-// background-size: 40%, 80%;
-// animation: open .5s;
+
 
 &:hover {
   background-color: #ffd8a8;
   box-shadow: 10px 8px 15px 0px  #white;
   transition: .5s;
+  p{
+    color:white;
+  }
 }`
-
-const StyledFM = styled.div`
-
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10rem`
-  
+const Styledtext = styled.h2`
+margin: auto;
+padding: auto;`
 
 
 const FamilyMember = () => {
@@ -143,8 +171,10 @@ const FamilyMember = () => {
 
   return (
     <>
-    <h1>프로필 선택</h1>
     <StyledFM>
+      <StyledForm>
+        <Styledtext>프로필 선택</Styledtext>
+        <StyledGrid>
       {Object.values(profile).map(( ele ) => {
         if (photoUrls[ele.name]) {
           return (
@@ -159,8 +189,10 @@ const FamilyMember = () => {
         }
         return null;
       })}
+      </StyledGrid>
+  <Button onClick={handleClick}>가족 추가</Button>
+      </StyledForm>
     </StyledFM>
-    <Button onClick={handleClick}>가족 추가</Button>
     </>
   );
 };
