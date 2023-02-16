@@ -10,9 +10,16 @@ import { RiMickeyFill, RiMickeyLine } from "react-icons/ri";
 
 
 const About = () => {
+  const [token, setToken] = useState("")
+
+  useEffect(() => {
+    if (localStorage.getItem("faccesstoken")){
+
+      setToken(localStorage.getItem("faccesstoken").replace(/"/gi, ""));
+    }
+  },[setToken])
   const [todoProfile, setTodoProfile]  = useState();
 
-  const token = localStorage.getItem("faccesstoken").replace(/"/gi, "")
   const [todoList, setTodoList] = useState({});
 
 

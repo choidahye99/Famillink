@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Button from "../components/common/Button";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { MdArrowBackIos } from "react-icons/md";
 import { familyMemberProfile, familyMemberName } from "../modules/token";
 // import Me from "/images/댜운로드.jpg";
 
@@ -182,6 +183,7 @@ const FamilyMember = () => {
     <>
     <StyledFM>
       <StyledForm>
+        {/* <MdArrowBackIos /> */}
         <Styledtext>프로필 선택</Styledtext>
         <StyledGrid>
       {Object.values(profile).map(( ele ) => {

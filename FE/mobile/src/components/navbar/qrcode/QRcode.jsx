@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./qrcode.css";
 import axios from "axios";
 import Button from "../../common/Button";
 
 const Blog = () => {
   const [showQR, setShowQR] = useState(false);
-  const faccessToken = localStorage.getItem("faccesstoken").replace(/"/gi, "");
-  const qrCodeUrl = `https://chart.googleapis.com/chart?cht=qr&chl=${faccessToken}&chs=500x500`;
+  const [token, setToken] = useState("")
+
+  useEffect(() => {
+    if (localStorage.getItem("faccesstoken")){
+
+      setToken(localStorage.getItem("faccesstoken").replace(/"/gi, ""));
+    }
+  },[setToken])
+
+  const qrCodeUrl = `https://chart.googleapis.com/chart?cht=qr&chl=${token}&chs=500x500`;
 
   const handleQRClick = () => {
     setShowQR(true);
