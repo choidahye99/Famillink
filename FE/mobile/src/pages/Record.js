@@ -2,6 +2,14 @@ import React, { useState, useEffect } from "react";
 import Button from "../components/common/Button";
 import styled from "styled-components";
 
+const StyledRectangle = styled.div`
+width: 55vh; 
+height: 70vh; 
+background-color: black;
+margin-bottom: 20px;
+
+`
+
 const StyledFM = styled.div`
   display: flex;
   justify-content: center;
@@ -74,7 +82,8 @@ const Record = () => {
   return (
     <StyledFM>
     <StyledForm>
-        <video id="video" width="640" height="480" autoplay></video>
+        <StyledRectangle />
+        {/* <video id="video" width="640" height="480" autoplay></video> */}
       <Styleddiv>
         <Button onClick={startRecording}>Start Recording</Button>
         <Button onClick={stopRecording}>Stop Recording</Button>

@@ -52,6 +52,13 @@ const Sidebar = ({ type }) => {
     )
   }
 
+  function handleMember() {
+    localStorage.removeItem("fmname")
+    localStorage.removeItem("fmccesstoken")
+    localStorage.removeItem("fmurl")
+
+  }
+
   return (
     <div>
       <aside className={showSidebar ? "aside show-menu" : "aside"}>
@@ -67,7 +74,7 @@ const Sidebar = ({ type }) => {
                 </a>
               </li>
               <li className="nav__item">
-                <a href="/FamilyMember" className="nav__link">
+                <a href="/FamilyMember" className="nav__link" onClick={handleMember}>
                   <SimpleLineIcon name="user-following" />
                 </a>
               </li>
@@ -77,13 +84,8 @@ const Sidebar = ({ type }) => {
                 </a>
               </li>
               <li className="nav__item">
-                <a href="#resume" className="nav__link">
-                  <SimpleLineIcon name="graduation" />
-                </a>
-              </li>
-              <li className="nav__item">
-                <a href="#portfolio" className="nav__link">
-                  <SimpleLineIcon name="layers" />
+                <a href="/Calendars" className="nav__link">
+                  <SimpleLineIcon name="calendar" />
                 </a>
               </li>
               <li className="nav__item">

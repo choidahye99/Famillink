@@ -13,20 +13,20 @@ const StyledFM = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height:100%;
+  height: 100%;
   `
   
   const StyledForm = styled.form`
-  // height: 100%;
-margin: 7vh;
-padding: 5vh;
+  padding: 0;
+height:90vh;
 width: 60vh;
 background: #fff;
-display: flex;
-justify-content: center;
+display: grid;
+grid-template-rows: 1fr 4fr 1fr;
 flex-direction: column;
 align-items: center;
 text-align: center;
+justify-content: center;
 border-radius: 15px;
 box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 
@@ -41,8 +41,9 @@ box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 `
 const StyledGrid = styled.div`
 // margin:8vh;
-padding: 8vh;
+padding: 1vh;
 display: grid;
+justify-content: center;
 grid-template-rows: 1fr;
 grid-template-columns: 1fr 1fr;
 `
@@ -50,7 +51,7 @@ grid-template-columns: 1fr 1fr;
 const StyledDiv = styled.div`
 height: 20vh;
 width: 20vh;
-padding: 3px;
+padding: 0;
 margin: 10px;
 border-radius: 15px;
 display: flex;
@@ -72,8 +73,16 @@ cursor: pointer;
   }
 }`
 const Styledtext = styled.h2`
-margin: auto;
-padding: auto;`
+`
+const ButtonSmall = styled(Button)`
+width: 200px;
+height: 40px;
+align-items: center;
+display: flex;
+justify-content: center;
+margin-left: 60px;
+
+`
 
 
 const FamilyMember = () => {
@@ -87,6 +96,7 @@ const FamilyMember = () => {
 
 
 
+
   useEffect(() => {
     if (families && fmname) {
       axios.post(`http://i8a208.p.ssafy.io:3000/member/login/access`, {
@@ -94,7 +104,6 @@ const FamilyMember = () => {
         user_uid: families
       })
       .then((res) => {
-        console.log(res)
         if(res) {
           localStorage.setItem('fmname', JSON.stringify(fmname))
           localStorage.setItem('fmurl', JSON.stringify(photoUrls[fmname]))
@@ -190,7 +199,7 @@ const FamilyMember = () => {
         return null;
       })}
       </StyledGrid>
-  <Button onClick={handleClick}>가족 추가</Button>
+        <ButtonSmall onClick={handleClick}>가족 추가</ButtonSmall>
       </StyledForm>
     </StyledFM>
     </>
