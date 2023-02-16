@@ -138,16 +138,16 @@ outline: none;
 display: flex;
 justify-content: center;
 align-items: center;
+line-height: 1rem;
 flex-direction: column;
+word-spacing: 0.05rem;
 background-color: #fd7e14;
 font-weight: var(--font-semibold);
-font-family: var(--body-font);
-font-size: var(--normal-font-size);
+font-size: var(--small-font-size);
 }
 
 .logbtn:hover {
   animation: button-push 0.3s linear 1;
-  background: #ffd8a8;
 }
 @keyframes button-push {
   50% {
@@ -161,13 +161,14 @@ font-size: var(--normal-font-size);
 
 
 .btn {
-  padding: 0.75rem 2rem;
+  margin:0;
+  padding: 0;
   line-height: 1;
   border-radius: 1.875rem;
-  box-shadow: 0 0 1px rgb(0 0 0 / 0%);
-  border: 1px solid transparent;
+  /* box-shadow: 0 0 1px rgb(0 0 0 / 0%); */
+  /* border: 1px solid transparent; */
   color: #fff;
-  display: inline-block;
+  /* display: inline-block; */
   background-color: var(--first-color);
   font-weight: var(--font-semibold);
 }

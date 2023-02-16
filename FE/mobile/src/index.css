@@ -33,7 +33,10 @@ code {
 
 #root {
   height: 100%;
+  --vh: 100%;
 }
+
+
 
 .App {
   height: 100%;

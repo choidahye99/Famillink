@@ -7,8 +7,9 @@ import { Link } from "react-router-dom";
 const StyledButton = styled.button`
 padding: 0.75rem 2rem;
 margin: 0.75rem;
-line-height: 1;
+line-height: 1rem;
 border-radius: 1.875rem;
+letter-spacing: 0.05rem;
 box-shadow: 0 0 1px rgb(0 0 0 / 0%);
 border: 1px solid transparent;
 color: #fff;
@@ -16,13 +17,14 @@ display: inline-block;
 cursor: pointer;
 border: none;
 outline: none;
+// justify-content: center;
 background-color: ${palette.orange[6]};
-font-weight: var(--font-bold);
-font-family: var(--body-font);
-font-size: var(--normal-font-size);
+font-weight: var(--font-semibold);
+// font-family: var(--body-font);
+font-size: var(--small-font-size);
 &:hover {
   animation: button-push 0.3s linear 1;
-  background: ${palette.orange[4]};
+  // background: ${palette.orange[4]};
 }
 @keyframes button-push {
   50% {
