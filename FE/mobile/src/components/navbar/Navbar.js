@@ -17,14 +17,14 @@ const Navbar = () => {
   }
   return (
     <>
-      <Sidebar />
+      {/* <Sidebar /> */}
       <main className="main">
         <Home />
         <About />
         <Services />
-        <Resume />
+        {/* <Resume />
         <Portfolio />
-        <Testimonials />
+        <Testimonials /> */}
         <div onClick={handleQRClick}>
         <QRcode />
         </div>

@@ -5,7 +5,7 @@ import Button from "../../common/Button";
 
 const Blog = () => {
   const [showQR, setShowQR] = useState(false);
-  const faccessToken = localStorage.getItem("faccesstoken");
+  const faccessToken = localStorage.getItem("faccesstoken").replace(/"/gi, "");
   const qrCodeUrl = `https://chart.googleapis.com/chart?cht=qr&chl=${faccessToken}&chs=500x500`;
 
   const handleQRClick = () => {

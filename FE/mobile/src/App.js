@@ -11,15 +11,29 @@ import Record from "./pages/Record";
 import Calendars from "./pages/Calendars";
 import Todo from "./pages/Todo";
 import QRcode from "./components/navbar/qrcode/QRcode"
+import { useEffect } from "react";
+import Sidebar from "./components/navbar/sidebar/Sidebar";
+import { useLocation } from "react-router-dom";
+
 
 
 function App() {
   const token = localStorage.getItem("faccesstoken");
+  const location = useLocation();
+
+  function setScreenSize() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  }
+  useEffect(() => {
+    setScreenSize();
+  })
 
   // const checkfamilymember = localStorage.getItem("")
   return (
     <div className="App">
         {/* <AuthLayout component={<Navbar />} authenticated={token} /> */}
+        {["/login","/SignUp","/SignUpSuccess", "/FamilyMember", "/FamilyMemberRegister"].includes(location.pathname) ? null : <Sidebar />}
       <Routes>
         <Route path="/" element={<Navbar />} />
         <Route path="/login" element={<Login />} />
@@ -36,6 +50,7 @@ function App() {
         <Route path="/Calendars" element={<Calendars/>} />
         <Route path="/qrcode" element={<QRcode />} />
       </Routes>
+
     </div>
   );
 }
