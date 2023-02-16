@@ -32,6 +32,7 @@ const WhiteBox = styled.div`
     letter-spacing: 2px;
   }
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem;
   padding: 2rem;
   width: 360px;
   background: white;
