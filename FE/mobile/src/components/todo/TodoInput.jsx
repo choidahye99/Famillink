@@ -92,7 +92,7 @@ const TodoInput = () => {
 
     //엔터 등록 이벤트
     const enterKeyEventHandler = (e) => {
-      if(e.key == 'Enter'){
+      if(e.key === 'Enter'){
         if(field.length>0){
           onBtnClick();
         }

@@ -4,48 +4,86 @@ import styled from "styled-components";
 import Button from "../components/common/Button";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { MdArrowBackIos } from "react-icons/md";
 import { familyMemberProfile, familyMemberName } from "../modules/token";
 // import Me from "/images/댜운로드.jpg";
 
-const StyledImg = styled.img`
-  width: 100px;
-  height: 100px;
+
+
+const StyledFM = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  `
+  
+  const StyledForm = styled.form`
+  padding: 0;
+height:90vh;
+width: 60vh;
+background: #fff;
+display: grid;
+grid-template-rows: 1fr 4fr 1fr;
+flex-direction: column;
+align-items: center;
+text-align: center;
+justify-content: center;
+border-radius: 15px;
+box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+
+  `
+
+  const StyledImg = styled.img`
+  width: 13vh;
+  height: 13vh;
   border-radius: 100%;
-  margin-bottom: 1.5rem;
-`;
+  margin: auto;
+  // margin-bottom: 1.5rem;
+`
+const StyledGrid = styled.div`
+// margin:8vh;
+padding: 1vh;
+display: grid;
+justify-content: center;
+grid-template-rows: 1fr;
+grid-template-columns: 1fr 1fr;
+`
 
 const StyledDiv = styled.div`
-height: 200px;
-width: 200px;
-padding: 15px;
-margin: auto;
-border-radius: 25px;
+height: 20vh;
+width: 20vh;
+padding: 0;
+margin: 10px;
+border-radius: 15px;
 display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
-box-shadow: 10px 8px 15px 0px  #ffd8a8;
+text-align: center;
+box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 background: #fff;
 cursor: pointer;
-/* background-image: url('https://github.com/OlgaKoplik/CodePen/blob/master/leaf2.png?raw=true'), url('https://github.com/OlgaKoplik/CodePen/blob/master/leaf.png?raw=true'); */
-// background-repeat: no-repeat, no-repeat;
-// background-position: 120% -5%, 200% -40%;
-// background-size: 40%, 80%;
-// animation: open .5s;
+
 
 &:hover {
   background-color: #ffd8a8;
   box-shadow: 10px 8px 15px 0px  #white;
   transition: .5s;
+  p{
+    color:white;
+  }
 }`
+const Styledtext = styled.h2`
+`
+const ButtonSmall = styled(Button)`
+width: 200px;
+height: 40px;
+align-items: center;
+display: flex;
+justify-content: center;
+margin-left: 60px;
 
-const StyledFM = styled.div`
-
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10rem`
-  
+`
 
 
 const FamilyMember = () => {
@@ -59,6 +97,7 @@ const FamilyMember = () => {
 
 
 
+
   useEffect(() => {
     if (families && fmname) {
       axios.post(`http://i8a208.p.ssafy.io:3000/member/login/access`, {
@@ -66,7 +105,6 @@ const FamilyMember = () => {
         user_uid: families
       })
       .then((res) => {
-        console.log(res)
         if(res) {
           localStorage.setItem('fmname', JSON.stringify(fmname))
           localStorage.setItem('fmurl', JSON.stringify(photoUrls[fmname]))
@@ -143,8 +181,11 @@ const FamilyMember = () => {
 
   return (
     <>
-    <h1>프로필 선택</h1>
     <StyledFM>
+      <StyledForm>
+        {/* <MdArrowBackIos /> */}
+        <Styledtext>프로필 선택</Styledtext>
+        <StyledGrid>
       {Object.values(profile).map(( ele ) => {
         if (photoUrls[ele.name]) {
           return (
@@ -159,8 +200,10 @@ const FamilyMember = () => {
         }
         return null;
       })}
+      </StyledGrid>
+        <ButtonSmall onClick={handleClick}>가족 추가</ButtonSmall>
+      </StyledForm>
     </StyledFM>
-    <Button onClick={handleClick}>가족 추가</Button>
     </>
   );
 };

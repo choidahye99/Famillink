@@ -1,62 +1,73 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./about.css";
 import Image from "../../images/다운로드.jpg";
 import AboutBox from "./AboutBox";
+import Button from "../../common/Button";
+import { Link } from "react-router-dom";
+import SimpleLineIcon from "react-simple-line-icons";
+import axios from "axios";
+import { RiMickeyFill, RiMickeyLine } from "react-icons/ri";
+
 
 const About = () => {
+  const [token, setToken] = useState("")
+
+  useEffect(() => {
+    if (localStorage.getItem("faccesstoken")){
+
+      setToken(localStorage.getItem("faccesstoken").replace(/"/gi, ""));
+    }
+  },[setToken])
+  const [todoProfile, setTodoProfile]  = useState();
+
+  const [todoList, setTodoList] = useState({});
+
+
+  axios.get("http://i8a208.p.ssafy.io:3000/todo", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => {
+    // console.log(res.data.todolist)
+    setTodoList(res.data.todolist)
+  }).catch((err) => {
+    console.log(err)
+  })
+
+  useEffect(() => {
+    if(localStorage.getItem("fmurl")) {
+    setTodoProfile(localStorage.getItem("fmurl").replace(/"/gi, ""))
+    }
+  },[])
   return (
     <section className="about container section" id="about">
-      <h2 className="section__title">About Me</h2>
+      <h2 className="section__title">오늘의 할 일</h2>
       <div className="about__container grid">
-        <img src={Image} alt="" className="about__img" />
-        <div className="about__data grid">
-          <div className="about__info">
+          <div className="about__info grid">
             <p className="about__description">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt
-              tenetur iusto, nulla laborum inventore pariatur excepturi ea
-              expedita suscipit beatae voluptatibus distinctio vero tempora
-              earum nisi soluta, nam, odit enim?
+              혹시 잊으셨나요?
             </p>
-            <a href="" className="btn">
-              Download CV
-            </a>
+            <Button className="btntodo">
+              <Link to="/todo" className="atodo">할 일 추가</Link></Button>
           </div>
-
-          <div className="about__skills grid">
-            <div className="skills__data">
-              <div className="skills__titles">
-                <h3 className="skills__name">Development</h3>
-                <span className="skills__number">90%</span>
-              </div>
-              <div className="skills__bar">
-                <span className="skills__percentage development"></span>
-              </div>
-            </div>
-
-            <div className="skills__data">
-              <div className="skills__titles">
-                <h3 className="skills__name">UI/ UX design</h3>
-                <span className="skills__number">80%</span>
-              </div>
-              <div className="skills__bar">
-                <span className="skills__percentage ui__design"></span>
+        <div className="about__data grid">
+            <div className="about__todo grid">
+              <div className="about__skills">
+      {Object.values(todoList).map(( ele ) => {
+          return (
+                <div className="skills__data grid" key={ele.uid}>
+                  <div className="skills__titles">
+                    <div className="skiils__icons">
+                      {ele.status === 1 ? <RiMickeyFill /> : <RiMickeyLine />}                    </div>
+                    <h3 className="skills__name">{ele.content}</h3>
+                  </div>
+                </div>
+                  );
+              })}
               </div>
             </div>
-
-            <div className="skills__data">
-              <div className="skills__titles">
-                <h3 className="skills__name">Photography</h3>
-                <span className="skills__number">60%</span>
-              </div>
-              <div className="skills__bar">
-                <span className="skills__percentage photography"></span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
-
-      <AboutBox />
     </section>
   );
 };

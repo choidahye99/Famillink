@@ -4,6 +4,7 @@ import Me from "../../images/다운로드.jpg";
 import HeaderSocials from './HeaderSocials';
 import ScrollDown from './ScrollDown';
 import { useNavigate } from "react-router-dom";
+import Button from "../../common/Button";
 // import { useSelector } from "react-redux";
 
 const Home = () => {
@@ -24,17 +25,21 @@ const Home = () => {
             navigate('/login')
         }
     },[])
+
+    function handleRecord() {
+        navigate('/Record')
+    }
   
     return (
         <section className="home container" id="home">
             <div className="intro">
                 <img src={sidebarProfile} alt="" className="home__img" />
                 <h1 className="home__name">{sidebarName}</h1>
-                <span className="home__education">I'm a Front-End developer</span>
+                <span className="home__education">안녕하세요 {sidebarName}님</span>
             
             <HeaderSocials />
             
-            <a href="#contact" className="btn">Hire Me</a>
+            <Button onClick={handleRecord}>영상 녹화</Button>
             
             <ScrollDown />
             </div>

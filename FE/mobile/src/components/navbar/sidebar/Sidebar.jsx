@@ -40,23 +40,30 @@ const Sidebar = ({ type }) => {
   let loginCheck;
   if(token != null){
     loginCheck = (
-      <button className="btn" onClick={onLogout}>
+      <button className="logbtn" onClick={onLogout}>
                 로그아웃
       </button>
     )
   } else {
     loginCheck = (
-      <button className="btn" onClick={onLogin}>
+      <button className="logbtn" onClick={onLogin}>
                 로그인
       </button>
     )
   }
 
+  function handleMember() {
+    localStorage.removeItem("fmname")
+    localStorage.removeItem("fmccesstoken")
+    localStorage.removeItem("fmurl")
+
+  }
+
   return (
-    <>
+    <div>
       <aside className={showSidebar ? "aside show-menu" : "aside"}>
         <a href="/" className="nav__logo">
-          <img src={sidebarProfile} alt="" />
+          <img className="profileimg" src={sidebarProfile} alt="" />
         </a>
         <nav className="nav">
           <div className="nav__menu">
@@ -67,7 +74,7 @@ const Sidebar = ({ type }) => {
                 </a>
               </li>
               <li className="nav__item">
-                <a href="/FamilyMember" className="nav__link">
+                <a href="/FamilyMember" className="nav__link" onClick={handleMember}>
                   <SimpleLineIcon name="user-following" />
                 </a>
               </li>
@@ -77,17 +84,12 @@ const Sidebar = ({ type }) => {
                 </a>
               </li>
               <li className="nav__item">
-                <a href="#resume" className="nav__link">
-                  <SimpleLineIcon name="graduation" />
+                <a href="/Calendars" className="nav__link">
+                  <SimpleLineIcon name="calendar" />
                 </a>
               </li>
               <li className="nav__item">
-                <a href="#portfolio" className="nav__link">
-                  <SimpleLineIcon name="layers" />
-                </a>
-              </li>
-              <li className="nav__item">
-                <a href="#blog" className="nav__link">
+                <a href="/qrcode" className="nav__link">
                   <SimpleLineIcon name="note" />
                 </a>
               </li>
@@ -99,7 +101,7 @@ const Sidebar = ({ type }) => {
         </nav>
 
         <div className="nav__footer">
-          <span className="copyright">&copy; 2022 - 2023.</span>
+          <span className="copyright">&copy; 2023.</span>
         </div>
       </aside>
 
@@ -109,7 +111,7 @@ const Sidebar = ({ type }) => {
       >
         <SimpleLineIcon name="menu" />
       </div>
-    </>
+    </div>
   );
 };
 
