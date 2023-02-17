@@ -56,6 +56,7 @@ const Sidebar = ({ type }) => {
     localStorage.removeItem("fmname")
     localStorage.removeItem("fmccesstoken")
     localStorage.removeItem("fmurl")
+    localStorage.removeItem("profile")
 
   }
 

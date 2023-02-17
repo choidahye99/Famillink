@@ -2,6 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import './FamilyMemberRegister.css' 
 import Button from "../components/common/Button";
+import login from '../modules/auth';
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const FamilyMemberRegister = () => {
 
@@ -9,7 +12,10 @@ const FamilyMemberRegister = () => {
   const [nickname, setNickname] = useState("");
   const [image, setImage] = useState(null)
   const [imageurl, setImageURL] = useState("")
-
+  const [profile, setProfile] = useState({});
+  const [memberuid, setMemberUid] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
 
   const imageInput = useRef();
@@ -34,43 +40,54 @@ const FamilyMemberRegister = () => {
   function handleApi(e) {
     e.preventDefault();
     const formData = new FormData()
-    formData.append('image', image )
-    // formData.append()
+    formData.append('img', image )
+
     const token = localStorage.getItem("faccesstoken").replace(/"/gi, "")
     const body = {
       name,
       nickname,
-    }
-    const bodies = {
-      name,
-      // fuid
     }
     axios.post('http://i8a208.p.ssafy.io:3000/member/signup', body, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((res) => {
-      console.log(res)
-      // const fuid = localStorage.getItem("fauid")
-      // axios.post('http://i8a208.p.ssafy.io:3000/member/login/access', bodies)
-      // .then((response) => {
-      //     console.log(response)
-      // }).catch((error) => {
-      //   console.log(error)
-      // })
-      // axios.post('http://i8a208.p.ssafy.io:3000/photo', formData, {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      // }).then((res) => {
-      //   console.log(res)
-      // }).catch((err) => {
-      //   console.log(err)
-      // })
-    })
-    .catch((err) => {
-      console.log(err)
+
+    .then((ress) => {
+      axios.get("http://i8a208.p.ssafy.io:3000/account/member-list",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      .then((res) => {
+        setProfile(res.data.list);
+        const arr = res.data.list
+        let returnIndex = arr.findIndex(ele => ele.name === name);
+        setMemberUid(arr[returnIndex].uid)
+        console.log(image, "image")
+        // formData.append('uid', memberuid )
+        const bodies = {
+          image,
+          memberuid,
+        }
+          localStorage.removeItem("profile")
+          navigate("/FamilyMember")
+        // console.log(formData)
+
+        // axios.post('http://i8a208.p.ssafy.io:3000/photo', bodies, {
+        //   headers: {
+        //     'Authorization': `Bearer ${token}`,
+        //     'Content-Type': 'multipart/form-data',
+        //   },
+        // }).then((res) => {
+        //   localStorage.removeItem("profile")
+        //   navigate("/FamilyMember")
+        // }).catch((err) => {
+        //   console.log("포토실패")
+        // })
+      });
     })
   }
 
