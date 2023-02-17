@@ -42,7 +42,9 @@ const FamilyMemberRegister = () => {
     const formData = new FormData()
     formData.append('img', image )
 
+    
     const token = localStorage.getItem("faccesstoken").replace(/"/gi, "")
+    const muid = localStorage.getItem("fauid").replace(/"/gi, "")
     const body = {
       name,
       nickname,
@@ -53,42 +55,41 @@ const FamilyMemberRegister = () => {
       },
     })
 
-    .then((ress) => {
-      axios.get("http://i8a208.p.ssafy.io:3000/account/member-list",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+    // .then((ress) => {
+    //   axios.get("http://i8a208.p.ssafy.io:3000/account/member-list",
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   })
+      
+      // .then((res) => {
+      //   setProfile(res.data.list);
+      //   const arr = res.data.list
+      //   let returnIndex = arr.findIndex(ele => ele.name === name);
+      //   setMemberUid(arr[returnIndex].uid)
+      //   console.log(image, "image")
+      //   const bodies = {
+      //     formData,
+      //     muid,
+      //     name,
+      //   }
+        formData.append('from_account_uid', muid)
+        formData.append('name', name)
 
-      .then((res) => {
-        setProfile(res.data.list);
-        const arr = res.data.list
-        let returnIndex = arr.findIndex(ele => ele.name === name);
-        setMemberUid(arr[returnIndex].uid)
-        console.log(image, "image")
-        // formData.append('uid', memberuid )
-        const bodies = {
-          image,
-          memberuid,
-        }
+        
+        axios.post('http://i8a208.p.ssafy.io:3000/photo', formData, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        }).then((res) => {
           localStorage.removeItem("profile")
           navigate("/FamilyMember")
-        // console.log(formData)
-
-        // axios.post('http://i8a208.p.ssafy.io:3000/photo', bodies, {
-        //   headers: {
-        //     'Authorization': `Bearer ${token}`,
-        //     'Content-Type': 'multipart/form-data',
-        //   },
-        // }).then((res) => {
-        //   localStorage.removeItem("profile")
-        //   navigate("/FamilyMember")
-        // }).catch((err) => {
-        //   console.log("포토실패")
-        // })
-      });
-    })
+        }).catch((err) => {
+          console.log(err)
+          console.log("포토실패")
+        });
   }
 
   function deleteFileImage() {
