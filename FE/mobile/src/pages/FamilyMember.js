@@ -95,9 +95,7 @@ const FamilyMember = () => {
   const dispatch = useDispatch();
   const result = [];
 
-  localStorage.removeItem("profile")
-
-
+  
   useEffect(() => {
     if (families && fmname) {
       axios.post(`http://i8a208.p.ssafy.io:3000/member/login/access`, {
@@ -106,6 +104,7 @@ const FamilyMember = () => {
       })
       .then((res) => {
         if(res) {
+          localStorage.removeItem("profile")
           localStorage.setItem('fmname', JSON.stringify(fmname))
           localStorage.setItem('fmurl', JSON.stringify(photoUrls[fmname]))
           // dispatch(familyMemberName(fmname))
