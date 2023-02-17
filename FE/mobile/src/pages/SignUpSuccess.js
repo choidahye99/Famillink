@@ -28,6 +28,7 @@ const StyledSucces = styled.div`
 
 const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
+  margin-left: 3.7rem;
 `;
 
 const SignupSuccess = () => {
