@@ -79,9 +79,9 @@ const ButtonSmall = styled(Button)`
 width: 200px;
 height: 40px;
 align-items: center;
-display: flex;
-justify-content: center;
-margin-left: 60px;
+// display: flex;
+// justify-content: center;
+margin-left: 7rem;
 
 `
 
@@ -95,7 +95,7 @@ const FamilyMember = () => {
   const dispatch = useDispatch();
   const result = [];
 
-
+  localStorage.removeItem("profile")
 
 
   useEffect(() => {
